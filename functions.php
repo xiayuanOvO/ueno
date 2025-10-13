@@ -202,6 +202,19 @@ function themeConfig($form)
     _t('选择需要启用的前端渲染选项。<br>代码高亮渲染会在文章中启用代码高亮功能，使用 Highlight.js 库，库文件直接从您的服务器提供。<br>公式渲染会在文章中启用公式渲染功能，使用 MathJax 库，由 jsDelivr 提供。使用 <code>$...$</code> 或 <code>\\(...\\)</code> 标记行内公式，使用 <code>$$...$$</code> 或 <code>\\[...\\]</code> 标记块级公式。')
   );
   $form->addInput($renderopt->multiMode());
+
+  $renderopt = new \Typecho\Widget\Helper\Form\Element\Checkbox(
+    'footerabout',
+    array(
+      'footerabout' => _t('显示')
+    ),
+    array(
+      'footerabout'
+    ),
+    _t('页脚关于信息'),
+    _t('选择是否在页脚显示关于信息：Powered by Typecho · Ueno theme by Linho')
+  );
+  $form->addInput($renderopt->multiMode());
 }
 
 
