@@ -1,10 +1,14 @@
-# UENO-Typecho
+# UENO
 
-![screenshot](./screenshot.png)
+[UENO](https://github.com/typlog/ueno) 是 [Typlog](https://typlog.com/) 的默认主题。
 
-[UENO](https://github.com/typlog/ueno) 是 [Typlog](https://typlog.com/) 的默认主题。本项目为 UENO 在 [Typecho](https://typecho.org/) 上的移植版本。
+本项目基于 [@Linho1219](https://github.com/Linho1219) 移植的 [Typecho](https://typecho.org/) 版本进行二次开发与调整。
+
+你可以在博客 [夏源の小窝](https://blog.xiayuanovo.cn/) 看到本主题的应用效果。
 
 如需快速开始，请转到 [开始使用](#开始使用)。
+
+![screenshot](./screenshot.png)
 
 ## 主题介绍
 
@@ -31,17 +35,18 @@
 
 - 副标题
 - 文章封面图（留空则使用文章中的第一张图片）
-- 版式（三个选项分别对应 Typlog 中的 Yue、Snow、Lotus 三个主题）
+- 版式（四个选项分别对应 Typlog 中的 Yue、Snow、Lotus 三个主题）
 
-### 相比原主题的改动
+### 有哪些改动？
 
-- Typlog 没有「分类」与「标签」之分，只提供了标签；而 Typecho 有分类和标签两个整理系统。移植主题时调整了这部分的样式，将分类与标签统一防止在标题附近，突出分类，弱化标签，并在文章列表页面的卡片左上角显示分类。
-- 原主题中亮色 / 暗色模式数据保存在 `sessionStorage` 中，关闭浏览器后清除；移植时改为使用 `localStorage`，下次打开时仍保持此前的设置。
+#### 新增
 
-### 限制与未提供的功能
+- 新增了评论区，现在会显示评论区的样式。
+- 新增了文章版式选项，可以选择四种不同的版式样式。
 
-- 未移植评论区的样式。评论区始终不会显示。
-- 若文章没有设定封面图，且全文没有图片，显示会发生错误。
+#### 修改
+
+- 修复了文章封面图无法不正确的问题，当文章没有设定封面图时，则不显示。
 
 ## 开始使用
 
@@ -49,6 +54,6 @@
 
 ## 授权模式
 
-由于上游仓库 [typlog/ueno](https://github.com/typlog/ueno) 未提供协议，为尊重原作者，本项目保持无协议状态。您可在此项目基础上二次修改或分发，但由此产生的潜在版权或商业纠纷与本仓库作者无关。
+由于上游仓库 [typlog/ueno](https://github.com/typlog/ueno) 与 [Linho1219/ueno-typecho](https://github.com/Linho1219/ueno-typecho) 未提供协议，为尊重原作者，本项目保持无协议状态。您可在此项目基础上二次修改或分发，但由此产生的潜在版权或商业纠纷与本仓库作者无关。
 
-如您是上游仓库的作者并认为此仓库侵权，请联系 [@Linho1219](https://github.com/Linho1219) 删除。
+如您是上游仓库的作者并认为此仓库侵权，请联系 [@xiayuanOvO](https://github.com/xiayuanOvO) 删除。
