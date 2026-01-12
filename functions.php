@@ -134,23 +134,59 @@ function themeConfig($form)
   );
   $form->addInput($instagramUrl);
 
-  for ($i = 1; $i <= 8; $i++) {
-    $form->addInput(new \Typecho\Widget\Helper\Form\Element\Text(
-      "sideLinkText{$i}",
-      null,
-      null,
-      _t("侧边栏链接 {$i} - 文本"),
-      _t("在这里填入链接文本")
-    ));
+  $sideLinkText1 = new \Typecho\Widget\Helper\Form\Element\Text(
+    'sideLinkText1',
+    null,
+    null,
+    _t('侧边栏链接 1 - 文本'),
+    _t('在这里填入链接文本')
+  );
+  $form->addInput($sideLinkText1);
 
-    $form->addInput(new \Typecho\Widget\Helper\Form\Element\Text(
-      "sideLinkUrl{$i}",
-      null,
-      null,
-      _t("侧边栏链接 {$i} - 链接"),
-      _t("在这里填入链接 URL")
-    ));
-  }
+  $sideLinkUrl1 = new \Typecho\Widget\Helper\Form\Element\Text(
+    'sideLinkUrl1',
+    null,
+    null,
+    _t('侧边栏链接 1 - 链接'),
+    _t('在这里填入链接 URL')
+  );
+  $form->addInput($sideLinkUrl1);
+
+  $sideLinkText2 = new \Typecho\Widget\Helper\Form\Element\Text(
+    'sideLinkText2',
+    null,
+    null,
+    _t('侧边栏链接 2 - 文本'),
+    _t('在这里填入链接文本')
+  );
+  $form->addInput($sideLinkText2);
+
+  $sideLinkUrl2 = new \Typecho\Widget\Helper\Form\Element\Text(
+    'sideLinkUrl2',
+    null,
+    null,
+    _t('侧边栏链接 2 - 链接'),
+    _t('在这里填入链接 URL')
+  );
+  $form->addInput($sideLinkUrl2);
+
+  $sideLinkText3 = new \Typecho\Widget\Helper\Form\Element\Text(
+    'sideLinkText3',
+    null,
+    null,
+    _t('侧边栏链接 3 - 文本'),
+    _t('在这里填入链接文本')
+  );
+  $form->addInput($sideLinkText3);
+
+  $sideLinkUrl3 = new \Typecho\Widget\Helper\Form\Element\Text(
+    'sideLinkUrl3',
+    null,
+    null,
+    _t('侧边栏链接 3 - 链接'),
+    _t('在这里填入链接 URL')
+  );
+  $form->addInput($sideLinkUrl3);
 
   $cssCode = new \Typecho\Widget\Helper\Form\Element\Textarea(
     'cssCode',
@@ -202,19 +238,6 @@ function themeConfig($form)
     _t('选择需要启用的前端渲染选项。<br>代码高亮渲染会在文章中启用代码高亮功能，使用 Highlight.js 库，库文件直接从您的服务器提供。<br>公式渲染会在文章中启用公式渲染功能，使用 MathJax 库，由 jsDelivr 提供。使用 <code>$...$</code> 或 <code>\\(...\\)</code> 标记行内公式，使用 <code>$$...$$</code> 或 <code>\\[...\\]</code> 标记块级公式。')
   );
   $form->addInput($renderopt->multiMode());
-
-  $renderopt = new \Typecho\Widget\Helper\Form\Element\Checkbox(
-    'footerabout',
-    array(
-      'footerabout' => _t('显示')
-    ),
-    array(
-      'footerabout'
-    ),
-    _t('页脚关于信息'),
-    _t('选择是否在页脚显示关于信息：Powered by Typecho · Ueno theme by Linho')
-  );
-  $form->addInput($renderopt->multiMode());
 }
 
 
@@ -231,6 +254,7 @@ function themeFields($layout)
 
   $layoutType = new \Typecho\Widget\Helper\Form\Element\Select('layoutType', array(
     'normal' => '普通',
+    'normal-cover' => '普通（带封面）',
     'topimage' => '顶部大头图',
     'leftimage' => '左侧大图',
   ), 'normal', _t('文章页面展示形式'));
@@ -244,4 +268,46 @@ function themeFields($layout)
     _t('若未设置，默认使用文章首图作为封面图')
   );
   $layout->addItem($coverImg);
+}
+
+function threadedComments($comments, $options)
+{
+  $singleCommentOptions = \Typecho\Widget::widget('Widget_Options');
+  if ($comments->authorId == $singleCommentOptions->userId && $singleCommentOptions->commentsMarkdown) {
+    $commentText = \Typecho\Markdown::convert($comments->text);
+  } else {
+    $commentText = $comments->text;
+  }
+  ?>
+  <li id="<?php $comments->theId(); ?>" class="comment-item<?php if ($comments->levels > 0) {
+    echo ' comment-child';
+  } ?>">
+    <div class="comment-author">
+      <?php $comments->gravatar(40, ''); ?>
+      <div class="comment-meta">
+        <span class="comment-author-name">
+          <?php if ($comments->url): ?>
+            <a href="<?php $comments->url(); ?>" rel="external nofollow" target="_blank"><?php $comments->author(); ?></a>
+          <?php else: ?>
+            <?php $comments->author(); ?>
+          <?php endif; ?>
+        </span>
+        <time class="comment-time" datetime="<?php $comments->date('c'); ?>">
+          <?php $comments->date('M j, Y H:i'); ?>
+        </time>
+      </div>
+    </div>
+    <div class="comment-content">
+      <?php echo $commentText; ?>
+    </div>
+    <div class="comment-actions">
+      <?php $comments->reply(_t('回复')); ?>
+    </div>
+    <?php if ($comments->children): ?>
+      <div class="comment-children">
+        <?php $comments->threadedComments(); ?>
+      </div>
+    <?php endif; ?>
+  </li>
+  <?php
 }

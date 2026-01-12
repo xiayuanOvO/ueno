@@ -23,10 +23,12 @@
       <?php while ($this->next()): ?>
         <div class="item Article Cover" lang="zh">
           <a class="item-cover" href="<?php $this->permalink() ?>">
+            <?php $coverImg = getPostImg($this); if ($coverImg !== 'none'): ?>
             <div class="item-cover_image">
-              <div class="js-cover" style="background-image:url(<?php echo getPostImg($this); ?>)">
+              <div class="js-cover" style="background-image:url(<?php echo $coverImg; ?>)">
               </div>
             </div>
+            <?php endif; ?>
             <div class="item-cover_inner">
               <p class="category" style="position:relative;bottom:80px;">
                 <?php

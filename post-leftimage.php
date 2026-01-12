@@ -45,7 +45,8 @@
   }
 </style>
 <article role="main" class="h-entry has-cover" itemscope="" itemtype="http://schema.org/Article">
-  <aside class="entry-cover js-cover" style="background-image:url(<?php echo getPostImg($this); ?>);">
+  <?php $coverImg = getPostImg($this); ?>
+  <aside class="entry-cover js-cover"<?php if ($coverImg !== 'none'): ?> style="background-image:url(<?php echo $coverImg; ?>);"<?php endif; ?>>
     <div class="site-nav has-cover">
       <a class="site-link" href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title() ?></a>
     </div>
@@ -91,6 +92,7 @@
           </a>
         </div>
       </section>
+      <?php $this->need('comments.php'); ?>
     </div>
     <?php $this->need('footer-content.php');
     $this->__THEME_NO_FOOTER__ = true

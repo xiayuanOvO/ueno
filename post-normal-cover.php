@@ -27,9 +27,14 @@
   <div class="main" role="main">
     <div class="inner main_mark">
       <article role="main" class="h-entry" itemscope itemtype="http://schema.org/Article">
+        <?php $coverImg = getPostImg($this); if ($coverImg !== 'none'): ?>
+        <div class="entry-cover">
+          <img class="u-photo" src="<?php echo $coverImg; ?>" alt="<?php $this->title() ?> cover">
+        </div>
+        <?php endif; ?>
         <div class="entry-meta">
           <time class="dt-published" datetime="<?php $this->date('c'); ?>"
-            itemprop="datePublished"><?php $this->date('n月 j, Y'); ?></time>
+            itemprop="datePublished"><?php $this->date('M j, Y'); ?></time>
           <?php if ($this->category): ?>
             <p class="entry-tags category">
               <?php $this->category(''); ?>

@@ -1,11 +1,11 @@
 <?php
 /**
- * UENO 在 Typecho 上的移植版主题
+ * UENO 基于 Linho1219 的修改版主题
  *
  * @package Ueno
- * @author 上野 / Linho1219
- * @version 0.8
- * @link https://github.com/Linho1219/ueno-typecho
+ * @author 上野 / Linho1219 / 夏源
+ * @version 0.1
+ * @link https://github.com/xiayuanOvO/ueno
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__'))
@@ -20,10 +20,12 @@ $this->need('header.php');
       <?php while ($this->next()): ?>
         <div class="item Article Cover" lang="zh">
           <a class="item-cover" href="<?php $this->permalink() ?>">
+            <?php $coverImg = getPostImg($this); if ($coverImg !== 'none'): ?>
             <div class="item-cover_image">
-              <div class="js-cover" style="background-image:url(<?php echo getPostImg($this); ?>)">
+              <div class="js-cover" style="background-image:url(<?php echo $coverImg; ?>)">
               </div>
             </div>
+            <?php endif; ?>
             <div class="item-cover_inner">
               <p class="category" style="position:relative;bottom:80px;">
                 <?php

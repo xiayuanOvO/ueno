@@ -31,9 +31,11 @@
   <a class="site-link" href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title() ?></a>
 </div>
 <article role="main" class="h-entry post has-cover" itemscope="" itemtype="http://schema.org/Article">
+  <?php $coverImg = getPostImg($this); if ($coverImg !== 'none'): ?>
   <div class="entry-cover js-cover">
-    <img class="u-photo" src="<?php echo getPostImg($this); ?>" alt="<?php $this->title() ?>">
+    <img class="u-photo" src="<?php echo $coverImg; ?>" alt="<?php $this->title() ?>">
   </div>
+  <?php endif; ?>
   <div class="entry-meta inner">
     <time class="js-time dt-published" datetime="<?php $this->date('c'); ?>" itemprop="datePublished">
       <?php $this->date('M j, Y'); ?>
@@ -77,4 +79,5 @@
       </div>
     </div>
   </section>
+  <?php $this->need('comments.php'); ?>
 </article>
